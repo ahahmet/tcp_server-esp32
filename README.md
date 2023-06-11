@@ -1,32 +1,49 @@
-# _Sample project_
+# Description
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+This project creates a tcp sever on esp32 and this server push the recieved data from tcp client over the uart port. Also if recieved data include in the configuration json file, server performs this settings. This settings includes the some gpio pin level changes or uart setting. Json file attached the below as an example.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+json file :
+{
 
+    "gpio":{
+        "open":{
+            "pin_num":[5,6,7]
+        },
+        "close":{
+            "pin_num":[8,9,10]
+        } 
+    },
+    "uart":{
+        "baudrate": 115200,
+        "parity":"none",
+        "stop_bit":1,
+        "data_bit":8
+    }}
 
+#### open object : This object includes the will set the gpio level high <br/>
+#### close object : This object includes the will set the gpio level low <br/>
+#### uart object : This object includes the will perform uart settings <br/>
 
 ## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+To connect wifi : You should go to componenets/periphs/wifi.h and the changes the WIFI_SSID WIFI_PWD defines according to your wifi network ssid and password.
 
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+## Project folder contents.
 
 Below is short explanation of remaining files in the project folder.
 
 ```
-├── CMakeLists.txt
+├── Components
+│   ├──Periphs
+│      ├──src
+│      ├──inc
+│   ├──CMakeLists.txt
+│   ├──tcp_server
+│      ├──src
+│      ├──inc
+│   ├──CMakeLists.txt
 ├── main
 │   ├── CMakeLists.txt
 │   └── main.c
+├── CMakeLists.txt
 └── README.md                  This is the file you are currently reading
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
