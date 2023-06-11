@@ -1,0 +1,22 @@
+{
+    "gpio":{
+        
+        "open":{
+            "pin_num":[5,6,7]
+        },
+
+        "close":{
+            "pin_num":[8,9,10]
+        } 
+
+    },
+
+    "uart":{
+
+        "baudrate": 115200,
+        "parity":"none",
+        "stop_bit":1,
+        "data_bit":8
+    }
+
+}
